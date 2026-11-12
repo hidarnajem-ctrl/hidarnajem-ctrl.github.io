@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Optimize Images for a Faster Website | Teknawy</title>
+<meta name="description" content="A practical checklist for web image optimization: sizing, formats, compression, lazy loading, dimensions and how images affect Core Web Vitals.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#4f46e5">
+<link rel="canonical" href="https://teknawy.click/blog/optimize-images-for-website-speed.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Teknawy">
+<meta property="og:url" content="https://teknawy.click/blog/optimize-images-for-website-speed.html">
+<meta property="og:title" content="How to Optimize Images for a Faster Website | Teknawy">
+<meta property="og:description" content="A practical checklist for web image optimization: sizing, formats, compression, lazy loading, dimensions and how images affect Core Web Vitals.">
+<meta property="og:image" content="https://teknawy.click/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to Optimize Images for a Faster Website", "description": "A practical checklist for web image optimization: sizing, formats, compression, lazy loading, dimensions and how images affect Core Web Vitals.", "mainEntityOfPage": "https://teknawy.click/blog/optimize-images-for-website-speed.html", "datePublished": "2026-11-13", "dateModified": "2026-11-13", "image": "https://teknawy.click/og-image.png", "author": {"@type": "Organization", "name": "Teknawy", "url": "https://teknawy.click/"}, "publisher": {"@type": "Organization", "name": "Teknawy", "logo": {"@type": "ImageObject", "url": "https://teknawy.click/apple-touch-icon.png"}}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://teknawy.click/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://teknawy.click/blog/"}, {"@type": "ListItem", "position": 3, "name": "How to Optimize Images for a Faster Website", "item": "https://teknawy.click/blog/optimize-images-for-website-speed.html"}]}]}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1341061237626351" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-logo" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M16 16l-4-4-4 4M12 12v9"/><path d="M20.4 18.4A5 5 0 0018 9h-1.3A8 8 0 103 16.3"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></symbol>
+  <symbol id="i-zip" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2l10 5-10 5L2 7z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol>
+  <symbol id="i-resize" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+  <symbol id="i-free" viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Teknawy home"><span class="logo-mark"><svg class="icon"><use href="#i-logo"/></svg></span>teknawy</a>
+    <nav class="nav">
+      <a href="/#tools" class="hide-sm" data-i18n="navTools">Tools</a>
+      <a href="/blog/" data-i18n="navBlog">Blog</a>
+      <select id="langSelector" class="lang" aria-label="Language">
+        <option value="en">English</option>
+        <option value="ar">العربية</option>
+        <option value="es">Español</option>
+      </select>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <p class="crumbs" style="max-width:760px;margin-left:auto;margin-right:auto"><a href="/">Home</a> › <a href="/blog/">Blog</a></p>
+  <header class="article-head">
+    <h1>How to Optimize Images for a Faster Website</h1>
+    <p class="by">By the Teknawy team · <time datetime="2026-11-13">November 13, 2026</time> · 8 min read</p>
+  </header>
+  <article class="prose">
+
+<p>Images usually make up the largest share of a web page's weight. Optimizing them is one of the quickest ways to make a site faster, reduce bounce rates and improve Google's Core Web Vitals. Here is a practical checklist you can follow for every image you publish.</p>
+<h2>Why image optimization matters</h2>
+<p>Google measures real-user experience with Core Web Vitals. One of them, <strong>Largest Contentful Paint (LCP)</strong>, measures how long it takes for the biggest visible element to appear — and on most pages that element is an image. A 3 MB hero photo on a mobile connection can take several seconds to arrive, while a well-optimized 150 KB version appears almost instantly.</p>
+<h2>1. Serve images at the right dimensions</h2>
+<p>Never rely on CSS to shrink a huge image. If an image is displayed at 800 pixels wide, export it at about 800–1600 pixels (the larger size covers high-density “retina” screens). Use the <a href="/resize-image.html">resize tool</a> to set a maximum width before uploading.</p>
+<h2>2. Use modern formats</h2>
+<p>WEBP is supported by all modern browsers and is usually 25–35% smaller than JPEG at the same quality. If your platform supports it, serve WEBP for photos and graphics alike.</p>
+<h2>3. Compress sensibly</h2>
+<p>A quality between 75% and 85% is the sweet spot for most photographs. Combined with resizing and WEBP, this commonly reduces images by 80–90% compared with the camera original.</p>
+<h2>4. Always set width and height</h2>
+<p>Add <code>width</code> and <code>height</code> attributes to your <code>&lt;img&gt;</code> tags. The browser can then reserve the correct space before the image loads, preventing the page from jumping around. This improves another Core Web Vital, <strong>Cumulative Layout Shift (CLS)</strong>.</p>
+<h2>5. Lazy-load images below the fold</h2>
+<p>Add <code>loading="lazy"</code> to images that are not visible when the page first opens. The browser will download them only when the visitor scrolls near them. Do <em>not</em> lazy-load the main hero image — it should load as early as possible.</p>
+<h2>6. Use responsive images</h2>
+<p>With the <code>srcset</code> and <code>sizes</code> attributes you can offer several sizes of the same image and let the browser pick the best one for each screen. Phones download a small version; large desktop screens get a larger one.</p>
+<h2>7. Write descriptive alt text</h2>
+<p>Alt text is read by screen readers and helps search engines understand your images. Describe what the image shows in a short, natural sentence, for example “Red running shoes on a wooden floor” instead of “IMG_2041”.</p>
+<h2>8. Use meaningful file names</h2>
+<p>Rename files before uploading: <code>red-running-shoes.webp</code> is more helpful than <code>DSC00231.jpg</code> for both visitors and image search.</p>
+<h2>Quick checklist</h2>
+<ul>
+<li>Resized to the display size (max ~2× for retina)</li>
+<li>Saved as WEBP (or JPEG for compatibility)</li>
+<li>Quality around 75–85%</li>
+<li>Width and height attributes set</li>
+<li>Lazy loading for below-the-fold images</li>
+<li>Descriptive alt text and file name</li>
+</ul>
+<p>You can handle the first three steps for all your images at once with the free <a href="/">Teknawy compressor</a> — no upload needed. Then test your page with Google PageSpeed Insights to see the improvement.</p>
+
+    <div class="card cta"><p>Compress, resize and convert your images for free — nothing is uploaded.</p><a class="btn btn-primary" href="/">Open the image compressor</a></div>
+  </article>
+  <section class="block"><h2>Free image tools</h2><p class="lead"></p><div class="tool-links"><a class="card tool-link" href="/png-to-webp.html"><span class="fi"><svg class="icon"><use href="#i-swap"/></svg></span><span><b>PNG to WEBP</b><span>Convert PNG images to lightweight WEBP.</span></span></a><a class="card tool-link" href="/jpg-to-webp.html"><span class="fi"><svg class="icon"><use href="#i-swap"/></svg></span><span><b>JPG to WEBP</b><span>Make JPEG photos smaller with WEBP.</span></span></a><a class="card tool-link" href="/compress-image-to-100kb.html"><span class="fi"><svg class="icon"><use href="#i-zip"/></svg></span><span><b>Compress to 100KB</b><span>Shrink any photo under a size limit.</span></span></a><a class="card tool-link" href="/resize-image.html"><span class="fi"><svg class="icon"><use href="#i-resize"/></svg></span><span><b>Resize Image</b><span>Change width and height in pixels.</span></span></a><a class="card tool-link" href="/compress-jpeg.html"><span class="fi"><svg class="icon"><use href="#i-layers"/></svg></span><span><b>Compress JPEG</b><span>Reduce JPG photo size in bulk.</span></span></a></div></section>
+  <section class="block"><h2>Keep reading</h2><p class="lead"></p><div class="posts"><a class="card post-card" href="/blog/compress-images-for-email-and-forms.html"><small>5 min read</small><h3>How to Shrink Photos for Email and Online Forms</h3><p>Step-by-step guide to making photos small enough for email attachments and upload forms with size limits like 100KB or 2MB — on phone or computer.</p></a><a class="card post-card" href="/blog/image-resolution-pixels-dpi.html"><small>5 min read</small><h3>Image Resolution, Pixels and DPI: What Actually Matters</h3><p>Pixels, resolution, DPI and PPI explained simply. Learn what matters for screens, for printing, and why changing DPI does not change file size.</p></a><a class="card post-card" href="/blog/why-compress-images-in-browser.html"><small>4 min read</small><h3>Why Compressing Images in Your Browser Is Safer</h3><p>Most online image compressors upload your photos to a server. Learn how client-side compression works and why it is more private and often faster.</p></a></div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p style="margin:0">© 2026 Teknawy · <span data-i18n="footerText">All processing happens locally on your device.</span></p>
+    <nav>
+      <a href="/about.html" data-i18n="about">About</a>
+      <a href="/privacy.html" data-i18n="privacy">Privacy Policy</a>
+      <a href="/terms.html" data-i18n="terms">Terms</a>
+      <a href="/blog/" data-i18n="navBlog">Blog</a>
+      <a href="/contact.html" data-i18n="contact">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/app.js" defer></script>
+</body>
+</html>
