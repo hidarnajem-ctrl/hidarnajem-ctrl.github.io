@@ -56,6 +56,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1341061237626351" crossorigin="anonymous"></script>
 </head>
 <body>
+<!--SPRITE-->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-logo" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></symbol>
   <symbol id="i-upload" viewBox="0 0 24 24"><path d="M16 16l-4-4-4 4M12 12v9"/><path d="M20.4 18.4A5 5 0 0018 9h-1.3A8 8 0 103 16.3"/></symbol>
@@ -73,13 +74,14 @@
   <symbol id="i-free" viewBox="0 0 24 24"><path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></symbol>
   <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
 </svg>
+<!--/SPRITE-->
 
 <header class="site-header">
   <div class="wrap">
     <a class="logo" href="/" aria-label="Teknawy home"><span class="logo-mark"><svg class="icon"><use href="#i-logo"/></svg></span>teknawy</a>
     <nav class="nav">
-      <a href="#how" class="hide-sm" data-i18n="navHow">How it works</a>
-      <a href="#faq" class="hide-sm" data-i18n="navFaq">FAQ</a>
+      <a href="/#tools" class="hide-sm" data-i18n="navTools">Tools</a>
+      <a href="/blog/" data-i18n="navBlog">Blog</a>
       <select id="langSelector" class="lang" aria-label="Language">
         <option value="en">English</option>
         <option value="ar">العربية</option>
@@ -96,6 +98,7 @@
     <p data-i18n="heroSub">Reduce the size of JPG, PNG and WEBP images in seconds — right in your browser. Batch process unlimited photos and download them all as a ZIP.</p>
   </section>
 
+  <!--TOOL-->
   <div class="tool">
     <label id="dropZone" class="drop">
       <input type="file" id="fileInput" multiple accept="image/png,image/jpeg,image/webp" aria-label="Choose images">
@@ -142,6 +145,8 @@
           <span class="lbl" data-i18n="optionsLabel">Options</span>
           <label class="check"><input type="checkbox" id="lockAspect" checked><span data-i18n="lockAspect">Keep aspect ratio</span></label>
           <label class="check" style="margin-top:8px"><input type="checkbox" id="keepSmaller" checked><span data-i18n="keepSmaller">Never make a file bigger</span></label>
+          <label for="targetKb" class="lbl" style="margin-top:14px" data-i18n="targetLbl">Target file size (optional)</label>
+          <input type="number" min="5" id="targetKb" class="input" data-i18n-ph="targetPh" placeholder="e.g. 100 KB">
         </div>
       </div>
     </div>
@@ -158,6 +163,21 @@
 
     <div id="imageGallery" class="list"></div>
   </div>
+  <!--/TOOL-->
+
+  <!--LINKS-->
+  <section class="block" id="tools">
+    <h2>More free image tools</h2>
+    <p class="lead">Specialised tools for common jobs — all private and free.</p>
+    <div class="tool-links"><a class="card tool-link" href="/png-to-webp.html"><span class="fi"><svg class="icon"><use href="#i-swap"/></svg></span><span><b>PNG to WEBP</b><span>Convert PNG images to lightweight WEBP.</span></span></a><a class="card tool-link" href="/jpg-to-webp.html"><span class="fi"><svg class="icon"><use href="#i-swap"/></svg></span><span><b>JPG to WEBP</b><span>Make JPEG photos smaller with WEBP.</span></span></a><a class="card tool-link" href="/compress-image-to-100kb.html"><span class="fi"><svg class="icon"><use href="#i-zip"/></svg></span><span><b>Compress to 100KB</b><span>Shrink any photo under a size limit.</span></span></a><a class="card tool-link" href="/resize-image.html"><span class="fi"><svg class="icon"><use href="#i-resize"/></svg></span><span><b>Resize Image</b><span>Change width and height in pixels.</span></span></a><a class="card tool-link" href="/compress-jpeg.html"><span class="fi"><svg class="icon"><use href="#i-layers"/></svg></span><span><b>Compress JPEG</b><span>Reduce JPG photo size in bulk.</span></span></a></div>
+  </section>
+  <section class="block" id="guides">
+    <h2>Guides &amp; tips</h2>
+    <p class="lead">Learn how to get the smallest files without losing quality.</p>
+    <div class="posts"><a class="card post-card" href="/blog/how-to-reduce-image-size.html"><small>6 min read</small><h3>How to Reduce Image File Size Without Losing Quality</h3><p>Five practical ways to make images smaller without visible quality loss: resizing, the right format, smart quality settings, metadata and batch tools.</p></a><a class="card post-card" href="/blog/jpg-vs-png-vs-webp.html"><small>7 min read</small><h3>JPG vs PNG vs WEBP: Which Image Format Should You Use?</h3><p>A clear comparison of JPG, PNG and WEBP: compression, transparency, quality, browser support and the best use for each format.</p></a><a class="card post-card" href="/blog/optimize-images-for-website-speed.html"><small>8 min read</small><h3>How to Optimize Images for a Faster Website</h3><p>A practical checklist for web image optimization: sizing, formats, compression, lazy loading, dimensions and how images affect Core Web Vitals.</p></a></div>
+    <p style="text-align:center;margin-top:20px"><a class="btn btn-soft" href="/blog/">All articles</a></p>
+  </section>
+  <!--/LINKS-->
 
   <section class="block" id="features">
     <h2 data-i18n="featTitle">Why use Teknawy to compress images?</h2>
@@ -217,6 +237,7 @@
       <a href="/about.html" data-i18n="about">About</a>
       <a href="/privacy.html" data-i18n="privacy">Privacy Policy</a>
       <a href="/terms.html" data-i18n="terms">Terms</a>
+      <a href="/blog/" data-i18n="navBlog">Blog</a>
       <a href="/contact.html" data-i18n="contact">Contact</a>
     </nav>
   </div>
