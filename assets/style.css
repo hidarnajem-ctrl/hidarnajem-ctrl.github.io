@@ -142,3 +142,34 @@ table.cmp th{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-
 .toast.ok{background:var(--ok)}
 @keyframes in{from{opacity:0;transform:translateY(8px)}}
 [dir=rtl] .flip{transform:scaleX(-1)}
+
+/* Tools & blog */
+.tool-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.tool-link{display:flex;gap:14px;align-items:flex-start;padding:18px;text-decoration:none;color:var(--ink);transition:.15s}
+.tool-link:hover{border-color:var(--brand);transform:translateY(-2px)}
+.tool-link .fi{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--brand-50);color:var(--brand);flex:none}
+.tool-link b{display:block;font-size:.95rem}
+.tool-link span{color:var(--muted);font-size:.84rem}
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.post-card{padding:22px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px;transition:.15s}
+.post-card:hover{border-color:var(--brand);transform:translateY(-2px)}
+.post-card h3{margin:0;font-size:1.05rem;line-height:1.35}
+.post-card p{margin:0;color:var(--muted);font-size:.9rem}
+.post-card small{color:var(--brand);font-weight:600;font-size:.8rem}
+.prose{max-width:760px;margin:0 auto}
+.prose h2{font-size:1.35rem;margin:36px 0 10px;letter-spacing:-.01em}
+.prose h3{font-size:1.08rem;margin:24px 0 8px}
+.prose p,.prose li{color:var(--ink-2);font-size:1.02rem;line-height:1.75}
+.prose table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+.prose th,.prose td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:start}
+.prose th{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+.prose .note{background:var(--brand-50);border-radius:12px;padding:14px 18px;margin:20px 0}
+.prose code{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-size:.9em}
+.crumbs{font-size:.85rem;color:var(--muted);margin:24px 0 0}
+.crumbs a{color:var(--muted)}
+.article-head{max-width:760px;margin:16px auto 8px}
+.article-head h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.2;letter-spacing:-.02em;margin:8px 0 12px}
+.article-head .by{color:var(--muted);font-size:.9rem}
+.cta{margin:36px 0;padding:24px;text-align:center}
+.cta p{margin:0 0 14px;font-weight:600;color:var(--ink)}
+.prose table{display:block;overflow-x:auto;white-space:nowrap}@media(min-width:700px){.prose table{display:table;white-space:normal}}

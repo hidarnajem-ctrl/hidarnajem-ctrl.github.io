@@ -118,6 +118,10 @@
     }
   };
 
+  Object.assign(T.en, { targetLbl:'Target file size (optional)', targetPh:'e.g. 100 KB', navTools:'Tools', navBlog:'Blog' });
+  Object.assign(T.ar, { targetLbl:'حجم الملف المطلوب (اختياري)', targetPh:'مثال: 100 KB', navTools:'الأدوات', navBlog:'المدونة' });
+  Object.assign(T.es, { targetLbl:'Tamaño objetivo (opcional)', targetPh:'ej. 100 KB', navTools:'Herramientas', navBlog:'Blog' });
+
   const $ = (id) => document.getElementById(id);
   const store = {
     get(k){ try { return localStorage.getItem(k); } catch { return null; } },
@@ -146,8 +150,16 @@
     gallery: $('imageGallery'), count: $('fileCount'), quality: $('qualityRange'), qualityVal: $('qualityVal'),
     format: $('formatSelect'), w: $('targetWidth'), h: $('targetHeight'), lock: $('lockAspect'), keep: $('keepSmaller'),
     clear: $('clearAllBtn'), zip: $('downloadZipBtn'), presets: $('presets'),
-    before: $('totalBefore'), after: $('totalAfter'), saved: $('totalSaved')
+    before: $('totalBefore'), after: $('totalAfter'), saved: $('totalSaved'), target: $('targetKb')
   };
+
+  if (!els.drop) { initLang(); return; } // pages without the tool (blog, legal)
+
+  // Page-specific defaults (set on <body data-format="image/webp" data-width="1080" data-target="100">)
+  const preset = document.body.dataset;
+  if (preset.format) els.format.value = preset.format;
+  if (preset.width) els.w.value = preset.width;
+  if (preset.target && els.target) els.target.value = preset.target;
 
   function toast(msg, ok) {
     const d = document.createElement('div');
@@ -210,28 +222,61 @@
 
   function ext(type) { return type === 'image/webp' ? 'webp' : type === 'image/png' ? 'png' : 'jpg'; }
 
-  function processItem(item) {
-    const ver = ++item.ver;
-    item.busy = true; render();
-    const { w, h } = targetSize(item);
-    const type = outType(item);
+  function draw(item, w, h, type) {
     const c = document.createElement('canvas');
     c.width = w; c.height = h;
     const ctx = c.getContext('2d');
     ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
     if (type === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
     ctx.drawImage(item.img, 0, 0, w, h);
-    c.toBlob(blob => {
-      if (ver !== item.ver) return; // a newer job replaced this one
-      item.busy = false;
-      if (!blob) { render(); return; }
-      const sameAsSource = type === item.type && w === item.w && h === item.h;
-      if (els.keep.checked && sameAsSource && blob.size >= item.size) { blob = item.file; item.kept = true; }
-      else item.kept = false;
-      if (item.url) URL.revokeObjectURL(item.url);
-      item.blob = blob; item.out = blob.size; item.url = URL.createObjectURL(blob); item.outType = type;
-      render();
-    }, type, parseInt(els.quality.value, 10) / 100);
+    return c;
+  }
+  const encode = (c, type, q) => new Promise(res => c.toBlob(res, type, q));
+
+  // Find the best quality (and, if needed, a smaller size) that fits under the target size.
+  async function fitToTarget(item, w, h, type, maxBytes) {
+    let scale = 1, best = null;
+    for (let round = 0; round < 8; round++) {
+      const cw = Math.max(1, Math.round(w * scale)), ch = Math.max(1, Math.round(h * scale));
+      const c = draw(item, cw, ch, type);
+      let lo = 0.05, hi = 0.95;
+      for (let i = 0; i < 7; i++) {
+        const q = (lo + hi) / 2;
+        const b = await encode(c, type, q);
+        if (b && b.size <= maxBytes) { best = { blob: b, w: cw, h: ch }; lo = q; } else hi = q;
+      }
+      if (best) return best;
+      scale *= 0.8;
+    }
+    const c = draw(item, Math.round(w * scale), Math.round(h * scale), type);
+    return { blob: await encode(c, type, 0.05), w: c.width, h: c.height };
+  }
+
+  async function processItem(item) {
+    const ver = ++item.ver;
+    item.busy = true; render();
+    let { w, h } = targetSize(item);
+    let type = outType(item);
+    const targetKb = els.target ? parseFloat(els.target.value) || 0 : 0;
+    let blob;
+    if (targetKb > 0) {
+      if (type === 'image/png') type = 'image/jpeg'; // PNG has no quality setting
+      const r = await fitToTarget(item, w, h, type, targetKb * 1024);
+      blob = r.blob; w = r.w; h = r.h;
+    } else {
+      blob = await encode(draw(item, w, h, type), type, parseInt(els.quality.value, 10) / 100);
+    }
+    if (ver !== item.ver) return; // a newer job replaced this one
+    item.busy = false;
+    if (!blob) { render(); return; }
+    const sameAsSource = type === item.type && w === item.w && h === item.h;
+    if (els.keep.checked && sameAsSource && blob.size >= item.size) { blob = item.file; item.kept = true; }
+    else item.kept = false;
+    if (targetKb > 0 && item.size <= targetKb * 1024 && type === item.type) { blob = item.file; item.kept = true; }
+    if (item.url) URL.revokeObjectURL(item.url);
+    item.blob = blob; item.out = blob.size; item.url = URL.createObjectURL(blob); item.outType = type;
+    item.outW = w; item.outH = h;
+    render();
   }
 
   let timer;
@@ -240,6 +285,8 @@
   els.quality.addEventListener('input', e => { els.qualityVal.textContent = e.target.value + '%'; reprocessAll(); });
   [els.format, els.lock, els.keep].forEach(el => el.addEventListener('change', reprocessAll));
   [els.w, els.h].forEach(el => el.addEventListener('input', () => { syncPresets(); reprocessAll(); }));
+  if (els.target) els.target.addEventListener('input', reprocessAll);
+  syncPresets();
   els.presets.addEventListener('click', e => {
     const b = e.target.closest('.chip'); if (!b) return;
     els.w.value = b.dataset.w; els.h.value = ''; syncPresets(); reprocessAll();
@@ -272,7 +319,7 @@
   const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function render() {
-    if (!els.gallery) return;
+    if (!els || !els.gallery) return;
     els.count.textContent = queue.length;
     const before = queue.reduce((s, i) => s + i.size, 0);
     const after = queue.reduce((s, i) => s + (i.out || i.size), 0);
@@ -283,7 +330,7 @@
     els.gallery.innerHTML = '';
     queue.forEach(item => {
       const pct = item.out ? Math.round((1 - item.out / item.size) * 100) : 0;
-      const dims = targetSize(item);
+      const dims = (!item.busy && item.outW) ? { w: item.outW, h: item.outH } : targetSize(item);
       const row = document.createElement('div');
       row.className = 'card item';
       row.innerHTML = `
@@ -330,8 +377,13 @@
     finally { els.zip.disabled = false; els.zip.innerHTML = label; render(); }
   });
 
-  $('langSelector').addEventListener('change', e => { store.set('lang', e.target.value); applyLang(e.target.value); });
-  const saved = store.get('lang');
-  const nav = (navigator.language || 'en').slice(0, 2);
-  applyLang(saved || (T[nav] ? nav : 'en'));
+  initLang();
+
+  function initLang() {
+    const sel = $('langSelector'); if (!sel) return;
+    sel.addEventListener('change', e => { store.set('lang', e.target.value); applyLang(e.target.value); });
+    const saved = store.get('lang');
+    const nav = (navigator.language || 'en').slice(0, 2);
+    applyLang(saved || (T[nav] ? nav : 'en'));
+  }
 })();
